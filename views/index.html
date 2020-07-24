@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+			integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+			crossorigin="anonymous"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="row pt-5">
+			<!-- 6 column div offset by 3 -->
+			<div class="col-md-6 offset-md-3">
+				<h6>Please enter a Subject and Text and press Submit to send an email</h6>
+			</div>
+		</div>
+		<form id="myForm">
+			<div class="row pt-5">
+				<!-- 6 column div offset by 3 -->
+				<div class="col-md-6 offset-md-3">
+					<div class="form-group">
+						<label for="subject">Enter your Subject</label>
+						<input type="text" class="form-control" name="subject" id="subject"></input>
+						<label for="textarea">Enter your Text</label>
+						<textarea class="form-control" name="textarea" id="text" rows="6"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+
+		<script>
+
+			const myForm = document.getElementById('myForm');
+
+			myForm.addEventListener('submit', (e) => {
+				e.preventDefault();
+				console.log('hallo')
+
+				const subject = document.getElementById('subject').value
+				const text = document.getElementById('text').value
+				console.log(subject)
+				console.log(text)
+
+				fetch('/email', {
+					method: 'post',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						subject: subject,
+						text: text,
+					})
+				})
+				.then(res => res.json())
+				.then(res => {
+					console.log(res.message);
+					alert(res.message)
+				})
+				.catch(function (error) {
+					console.error(error);
+				});
+			})
+
+		</script>
+
+	</body>
+</html>
