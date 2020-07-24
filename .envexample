@@ -1,0 +1,4 @@
+API_KEY='Your API-KEY from MailGun'
+DOMAIN='Your Domain'
+MAIL_FROM=''
+MAIL_TO=''
