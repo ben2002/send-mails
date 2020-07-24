@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { sendMail } = require('../../mail');
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/email', (req, res) => {
 	console.log(req.body);
+	sendMail(req.body.subject, req.body.text);
 	res.json({ message: 'email sent!!!!' });
 });
 

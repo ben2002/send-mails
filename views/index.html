@@ -45,12 +45,9 @@
 
 			myForm.addEventListener('submit', (e) => {
 				e.preventDefault();
-				console.log('hallo')
 
 				const subject = document.getElementById('subject').value
 				const text = document.getElementById('text').value
-				console.log(subject)
-				console.log(text)
 
 				fetch('/email', {
 					method: 'post',
