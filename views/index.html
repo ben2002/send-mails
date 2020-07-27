@@ -15,9 +15,16 @@
 			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 			crossorigin="anonymous"
 		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+			crossorigin="anonymous"
+		></script>
 		<title>Document</title>
 	</head>
 	<body>
+		<div class="container">
 		<div class="row pt-5">
 			<!-- 6 column div offset by 3 -->
 			<div class="col-md-6 offset-md-3">
@@ -39,38 +46,55 @@
 			</div>
 		</form>
 
-		<script>
+		<div class="row pt-5">
+			<div class="col-md-6 offset-md-3" id="div-alert">
+			</div>
+		</div>
+	</div>
 
-			const myForm = document.getElementById('myForm');
+	<script>
+		const myForm = document.getElementById('myForm');
 
-			myForm.addEventListener('submit', (e) => {
-				e.preventDefault();
+		myForm.addEventListener('submit', (e) => {
+			e.preventDefault();
 
-				const subject = document.getElementById('subject').value
-				const text = document.getElementById('text').value
+			const subject = document.getElementById('subject').value;
+			const text = document.getElementById('text').value;
 
-				fetch('/email', {
-					method: 'post',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						subject: subject,
-						text: text,
-					})
+			fetch('/email', {
+				method: 'post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					subject: subject,
+					text: text
 				})
-				.then(res => res.json())
-				.then(res => {
-					console.log(res.message);
-					alert(res.message)
-				})
-				.catch(function (error) {
-					console.error(error);
-				});
 			})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log(res.message);
 
-		</script>
+				let alertDiv = document.getElementById('div-alert');
 
-	</body>
+				let div = document.createElement('DIV');
+				div.classList.add('alert', 'alert-primary');
+				div.innerHTML = `<strong>${res.message}</strong>`;
+
+				alertDiv.appendChild(div);
+
+				setTimeout(() => {
+					alertDiv.removeChild(div);
+				}, 2000);
+
+				//alert(res.message)
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+		});
+	</script>
+
+	</body>	
 </html>

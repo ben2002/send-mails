@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 router.post('/email', (req, res) => {
 	console.log(req.body);
 	sendMail(req.body.subject, req.body.text);
-	res.json({ message: 'email sent!!!!' });
+	res.json({ message: 'An email was sent!' });
 });
 
 module.exports = router;
