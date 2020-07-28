@@ -24,35 +24,50 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<div class="container">
-		<div class="row pt-5">
-			<!-- 6 column div offset by 3 -->
-			<div class="col-md-6 offset-md-3">
-				<h6>Please enter a Subject and Text and press Submit to send an email</h6>
+	<div class="container mt-5">
+		<div class="card bg-info col-md-6 mx-auto">
+			<div class="container">
+				<div class="row pt-3">
+						<!-- 6 column div -->
+						<!-- use mx-auto to push elements in the middle-->
+					<div class="col-md-12 mx-auto text-white">
+						<h2>Please send an email to example@domain.de</h2>
+					</div>
+				</div>
+				<form id="myForm">
+					<div class="row">
+						<!-- 6 column div -->
+						<!-- use mx-auto to push elements in the middle-->
+						<div class="col-md-12 mx-auto text-white">
+							<div class="form-group">
+								<div class="pt-5">
+									<label for="subject"><strong>Enter your Subject</strong></label>
+									<input type="text" class="form-control" name="subject" id="subject"></input>
+								</div>
+								<div class="pt-5">
+									<label for="textarea"><strong> Enter your Text</strong></label>
+									<textarea class="form-control" name="textarea" id="text" rows="6"></textarea>
+								</div>
+							</div>
+							<div class="py-5">
+							<button type="submit" class="btn btn-block btn-light">Send Mail</button>
+						</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<form id="myForm">
-			<div class="row pt-5">
-				<!-- 6 column div offset by 3 -->
-				<div class="col-md-6 offset-md-3">
-					<div class="form-group">
-						<label for="subject">Enter your Subject</label>
-						<input type="text" class="form-control" name="subject" id="subject"></input>
-						<label for="textarea">Enter your Text</label>
-						<textarea class="form-control" name="textarea" id="text" rows="6"></textarea>
-					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</div>
-			</div>
-		</form>
-
-		<div class="row pt-5">
-			<div class="col-md-6 offset-md-3" id="div-alert">
-			</div>
+		<div class="row py-4">
+			<!-- 6 column div -->
+			<!-- use mx-auto to push elements in the middle-->
+			<div class="col-md-6 mx-auto" id="div-alert"></div>
 		</div>
 	</div>
 
+
 	<script>
+
+
 		const myForm = document.getElementById('myForm');
 
 		myForm.addEventListener('submit', (e) => {
@@ -79,8 +94,8 @@
 				let alertDiv = document.getElementById('div-alert');
 
 				let div = document.createElement('DIV');
-				div.classList.add('alert', 'alert-primary');
-				div.innerHTML = `<strong>${res.message}</strong>`;
+				div.classList.add('alert', 'alert-success');
+				div.innerHTML = res.message;
 
 				alertDiv.appendChild(div);
 
